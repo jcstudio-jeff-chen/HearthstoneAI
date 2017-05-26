@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">爐石戰記 AI</string>
+    <string name="play_with_ai">和 AI 玩</string>
+    <string name="ai_learn">讓 AI 自我學習</string>
+    <string name="about_current_ai">目前 AI 資訊</string>
+    <string name="reset_ai">重置 AI</string>
+    <string name="game_guide">遊戲規則說明</string>
+    <string name="game_guide_content">每副套牌由花費 1 至 10 的卡牌各三張構成，共 30 張，1 攻擊力視為 0.5 花費，1 血量視為 0.5 花費，有嘲諷視為 0.5 花費，每張卡牌能力值隨機，但加總後必等同其花費+1，例如 2/2/3 嘲諷, 9/10/10，另外攻擊力為 0 的卡牌必有嘲諷。此 app 僅用於測試 AI 學習生物交換的能力，目前並無特殊能力的卡牌，也無英雄天生技，未來可望加入。</string>
+</resources>
