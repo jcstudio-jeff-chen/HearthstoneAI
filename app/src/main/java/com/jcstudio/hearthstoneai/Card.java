@@ -1,5 +1,7 @@
 package com.jcstudio.hearthstoneai;
 
+import android.graphics.Color;
+
 import java.util.Random;
 
 /**
@@ -38,6 +40,13 @@ public class Card {
             return "幣";
         }
         return cost + "\n" + atk + "/" + hp;
+    }
+
+    public int filterColor(){
+        if(isCoin){
+            return Color.CYAN;
+        }
+        return hasTaunt ? Color.GREEN : Color.TRANSPARENT;
     }
 
     public static Card randomCard(int cost, double tauntRate){

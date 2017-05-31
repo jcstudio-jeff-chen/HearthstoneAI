@@ -68,7 +68,7 @@
                     android:id="@+id/tv_mana_0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5"/>
+                    android:text="0"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -79,7 +79,7 @@
                     android:id="@+id/tv_max_mana_0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5"
+                    android:text="0"
                     android:layout_marginRight="16dp"/>
 
                 <TextView
@@ -99,6 +99,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/minion_field_0"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -106,6 +107,7 @@
             android:gravity="center">
 
             <Button
+                android:id="@+id/b_minion_0_0"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -113,6 +115,7 @@
                 android:text="2\n3/3"/>
 
             <Button
+                android:id="@+id/b_minion_0_1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -120,14 +123,15 @@
                 android:text="3\n4/4"/>
 
             <Button
+                android:id="@+id/b_minion_0_2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="4\n5/4"
-                android:padding="0dp"
-                style="@style/Widget.AppCompat.Button.Colored"/>
+                android:padding="0dp"/>
 
             <Button
+                android:id="@+id/b_minion_0_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -135,6 +139,7 @@
                 android:text="5\n6/6"/>
 
             <Button
+                android:id="@+id/b_minion_0_4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -142,6 +147,7 @@
                 android:text="6\n7/7"/>
 
             <Button
+                android:id="@+id/b_minion_0_5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -150,12 +156,12 @@
 
 
             <Button
+                android:id="@+id/b_minion_0_6"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="7\n3/12"
-                android:padding="0dp"
-                style="@style/Widget.AppCompat.Button.Colored"/>
+                android:padding="0dp"/>
 
         </LinearLayout>
 
@@ -229,11 +235,13 @@
                 android:id="@+id/b_finish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="結束回合"/>
+                android:text="結束回合"
+                android:onClick="finishTurn"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/minion_field_1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -241,6 +249,7 @@
             android:gravity="center">
 
             <Button
+                android:id="@+id/b_minion_1_0"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -248,6 +257,7 @@
                 android:text="2\n3/3"/>
 
             <Button
+                android:id="@+id/b_minion_1_1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -255,14 +265,15 @@
                 android:text="3\n4/4"/>
 
             <Button
+                android:id="@+id/b_minion_1_2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="4\n5/4"
-                android:padding="0dp"
-                style="@style/Widget.AppCompat.Button.Colored"/>
+                android:padding="0dp"/>
 
             <Button
+                android:id="@+id/b_minion_1_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -270,6 +281,7 @@
                 android:text="5\n6/6"/>
 
             <Button
+                android:id="@+id/b_minion_1_4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -277,6 +289,7 @@
                 android:text="6\n7/7"/>
 
             <Button
+                android:id="@+id/b_minion_1_5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -285,12 +298,12 @@
 
 
             <Button
+                android:id="@+id/b_minion_1_6"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="7\n3/12"
-                android:padding="0dp"
-                style="@style/Widget.AppCompat.Button.Colored"/>
+                android:padding="0dp"/>
 
         </LinearLayout>
 
@@ -349,7 +362,7 @@
                     android:id="@+id/tv_mana_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5"/>
+                    android:text="0"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -360,7 +373,7 @@
                     android:id="@+id/tv_max_mana_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5"
+                    android:text="0"
                     android:layout_marginRight="16dp"/>
 
                 <TextView
@@ -380,10 +393,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/card_field"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:weightSum="10"
+            android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <Button
@@ -392,6 +407,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="0dp"
+                android:onClick="useCard"
                 android:text="幣"/>
 
             <Button
@@ -400,6 +416,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="0dp"
+                android:onClick="useCard"
                 android:text="2\n3/3"/>
 
             <Button
@@ -408,6 +425,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="0dp"
+                android:onClick="useCard"
                 android:text="3\n4/4"/>
 
             <Button
@@ -416,8 +434,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="4\n5/4"
-                android:padding="0dp"
-                style="@style/Widget.AppCompat.Button.Colored"/>
+                android:onClick="useCard"
+                android:padding="0dp"/>
 
             <Button
                 android:id="@+id/b_card_4"
@@ -425,6 +443,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="0dp"
+                android:onClick="useCard"
                 android:text="5\n6/6"/>
 
             <Button
@@ -433,6 +452,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="0dp"
+                android:onClick="useCard"
                 android:text="6\n7/7"/>
 
             <Button
@@ -441,8 +461,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="7\n3/12"
-                android:padding="0dp"
-                style="@style/Widget.AppCompat.Button.Colored"/>
+                android:onClick="useCard"
+                android:padding="0dp"/>
 
             <Button
                 android:id="@+id/b_card_7"
@@ -450,6 +470,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="0dp"
+                android:onClick="useCard"
                 android:text="8\n9/9"/>
 
             <Button
@@ -458,6 +479,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="0dp"
+                android:onClick="useCard"
                 android:text="9\n10/10"/>
 
             <Button
@@ -466,6 +488,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="0dp"
+                android:onClick="useCard"
                 android:text="10\n11/11"/>
 
         </LinearLayout>

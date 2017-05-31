@@ -17,11 +17,12 @@ public class Game {
 
     public ArrayList<ArrayList<Card>> decks = new ArrayList<>(2);
     public ArrayList<ArrayList<Card>> handCards = new ArrayList<>(2);
+    public ArrayList<ArrayList<Minion>> minions = new ArrayList<>(2);
 
-    private int turnSide;
+    public int turnSide;
     private int[] hp = {30, 30};
-    private int[] manna = {0, 0};
-    private int[] maxManna = {0, 0};
+    public int[] mana = {0, 0};
+    private int[] maxMana = {0, 0};
     private int[] tiredAmount = {0, 0};
 
     public Observer observer;
@@ -30,6 +31,7 @@ public class Game {
         for(int i = 0; i < 2; i++) {
             decks.add(new ArrayList<Card>(30));
             handCards.add(new ArrayList<Card>(10));
+            minions.add(new ArrayList<Minion>(7));
         }
     }
 
@@ -77,9 +79,11 @@ public class Game {
         Log.d("Game", "後手多抽一張");
         drawCard(1-turnSide);
         Log.d("Game", "後手獲得幸運幣");
-        handCards.get(1-turnSide).add(new Card());
+        Card coin = new Card();
+        handCards.get(1-turnSide).add(coin);
         if(observer != null){
-            observer.onCoinGained(1-turnSide);
+            observer.onCoinGained(1-turnSide, coin);
+            observer.onInitialDrawFinished();
         }
     }
 
@@ -110,13 +114,107 @@ public class Game {
         }
     }
 
+    public void changeSide(){
+        Log.d("Game", NAMES[1-turnSide] + "回合");
+        turnSide = 1-turnSide;
+        if(observer != null){
+            observer.onSideChanged(turnSide);
+        }
+    }
+
+    public void setMaxMana(int side, int value){
+        Log.d("Game", NAMES[side] + "水晶上限由 " + maxMana[side] + " 設為 " + value);
+        if(value != maxMana[side]){
+            maxMana[side] = value;
+            if(observer != null){
+                observer.onMaxManaChanged(side, value);
+            }
+        }
+    }
+
+    public void setMana(int side, int value){
+        Log.d("Game", NAMES[side] + "水晶由 " + mana[side] + " 設為 " + value);
+        if(value != mana[side]){
+            mana[side] = value;
+            if(observer != null){
+                observer.onManaChanged(side, value);
+            }
+        }
+    }
+
+    public void resetMana(){
+        for(int i = 0; i < 2; i++){
+            setMaxMana(i, 0);
+            setMana(i, 0);
+        }
+    }
+
+    public void fillMana(int side){
+        setMana(side, maxMana[side]);
+    }
+
+    public void setManaForNewTurn(){
+        int newMaxMana = Math.min(maxMana[turnSide]+1, 10);
+        setMaxMana(turnSide, newMaxMana);
+        fillMana(turnSide);
+    }
+
+    public void drawCardForNewTurn(){
+        drawCard(turnSide);
+    }
+
+    public boolean isUsable(int side, Card c){
+        if(side != turnSide){
+            return false;
+        }
+
+        if(c.isCoin){
+            return true;
+        }
+
+        if(minions.get(side).size() == 7){
+            return false;
+        }
+
+        return c.cost <= mana[side];
+    }
+
+    public void useCard(int i){
+        Card c = handCards.get(turnSide).remove(i);
+        Log.d("Game", NAMES[turnSide] + "使用第 " + i + " 張手牌：" + c);
+        if(observer != null){
+            observer.onCardUsed(turnSide, i, c);
+        }
+        if(c.isCoin){
+            int newMana = Math.min(mana[turnSide] + 1, 10);
+            setMana(turnSide, newMana);
+            return;
+        }
+        setMana(turnSide, mana[turnSide] - c.cost);
+        Minion minion = new Minion(c);
+        putMinion(turnSide, minion);
+    }
+
+    private void putMinion(int side, Minion minion){
+        Log.d("Game", NAMES[turnSide] + "將" + minion + "放到場上");
+        minions.get(side).add(minion);
+        if(observer != null){
+            observer.onMinionSummoned(side, minion);
+        }
+    }
+
     public interface Observer {
         void onDeckPrepared();
         void onFirstHandDetermined(int side);
-        void onCoinGained(int side);
+        void onCoinGained(int side, Card coin);
         void onCardDraw(int side, Card card);
         void onCardBurn(int side, Card card);
         void onTired(int side, int damage);
-        void onTurn(int newSide);
+        void onManaChanged(int side, int mana);
+        void onMaxManaChanged(int side, int maxMana);
+        void onInitialDrawFinished();
+        void onCardUsed(int side, int i, Card c);
+        void onMinionSummoned(int side, Minion minion);
+        void onSideChanged(int side);
     }
 }
