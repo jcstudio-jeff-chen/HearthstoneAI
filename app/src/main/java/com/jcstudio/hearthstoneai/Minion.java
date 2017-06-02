@@ -6,6 +6,8 @@ package com.jcstudio.hearthstoneai;
 
 public class Minion extends Card {
     int currentHp;
+    boolean isSleeping;
+    boolean isResting;
     public Minion(Card c){
         this.cost = c.cost;
         this.atk = c.atk;
@@ -13,6 +15,8 @@ public class Minion extends Card {
         this.currentHp = this.hp;
         this.isCoin = false;
         this.hasTaunt = c.hasTaunt;
+        this.isSleeping = true;
+        this.isResting = false;
     }
 
     @Override

@@ -46,11 +46,30 @@
 
             </LinearLayout>
 
-            <Button
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:text="30"/>
+            <FrameLayout
+                android:layout_width="70dp"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/b_hero_0"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:onClick="attackHero"
+                    android:text="30"/>
+
+                <TextView
+                    android:id="@+id/attack_bubble_0_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/damage_ring"
+                    android:translationZ="5dp"
+                    android:layout_margin="5dp"
+                    android:text="-1"/>
+
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -106,62 +125,196 @@
             android:weightSum="10"
             android:gravity="center">
 
-            <Button
-                android:id="@+id/b_minion_0_0"
+            <FrameLayout
+                android:id="@+id/slot_0_0"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:text="2\n3/3"/>
+                android:layout_weight="1">
 
-            <Button
-                android:id="@+id/b_minion_0_1"
+                <Button
+                    android:id="@+id/b_minion_0_0"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="0dp"
+                    android:onClick="attackMinion"
+                    android:text="2\n3/3"/>
+
+                <TextView
+                    android:id="@+id/attack_bubble_0_0"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/damage_ring"
+                    android:translationZ="5dp"
+                    android:layout_margin="5dp"
+                    android:text="-1"/>
+
+            </FrameLayout>
+
+
+
+            <FrameLayout
+                android:id="@+id/slot_0_1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:text="3\n4/4"/>
+                android:layout_weight="1">
 
-            <Button
-                android:id="@+id/b_minion_0_2"
+                <Button
+                    android:id="@+id/b_minion_0_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="0dp"
+                    android:onClick="attackMinion"
+                    android:text="2\n3/3"/>
+
+                <TextView
+                    android:id="@+id/attack_bubble_0_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/damage_ring"
+                    android:translationZ="5dp"
+                    android:layout_margin="5dp"
+                    android:text="-1"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/slot_0_2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="4\n5/4"
-                android:padding="0dp"/>
+                android:layout_weight="1">
 
-            <Button
-                android:id="@+id/b_minion_0_3"
+                <Button
+                    android:id="@+id/b_minion_0_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="0dp"
+                    android:onClick="attackMinion"
+                    android:text="2\n3/3"/>
+
+                <TextView
+                    android:id="@+id/attack_bubble_0_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/damage_ring"
+                    android:translationZ="5dp"
+                    android:layout_margin="5dp"
+                    android:text="-1"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/slot_0_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:text="5\n6/6"/>
+                android:layout_weight="1">
 
-            <Button
-                android:id="@+id/b_minion_0_4"
+                <Button
+                    android:id="@+id/b_minion_0_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="0dp"
+                    android:onClick="attackMinion"
+                    android:text="2\n3/3"/>
+
+                <TextView
+                    android:id="@+id/attack_bubble_0_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/damage_ring"
+                    android:translationZ="5dp"
+                    android:layout_margin="5dp"
+                    android:text="-1"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/slot_0_4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:text="6\n7/7"/>
+                android:layout_weight="1">
 
-            <Button
-                android:id="@+id/b_minion_0_5"
+                <Button
+                    android:id="@+id/b_minion_0_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="0dp"
+                    android:onClick="attackMinion"
+                    android:text="2\n3/3"/>
+
+                <TextView
+                    android:id="@+id/attack_bubble_0_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/damage_ring"
+                    android:translationZ="5dp"
+                    android:layout_margin="5dp"
+                    android:text="-1"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/slot_0_5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:text="6\n10/4"/>
+                android:layout_weight="1">
 
+                <Button
+                    android:id="@+id/b_minion_0_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="0dp"
+                    android:onClick="attackMinion"
+                    android:text="2\n3/3"/>
 
-            <Button
-                android:id="@+id/b_minion_0_6"
+                <TextView
+                    android:id="@+id/attack_bubble_0_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/damage_ring"
+                    android:translationZ="5dp"
+                    android:layout_margin="5dp"
+                    android:text="-1"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/slot_0_6"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="7\n3/12"
-                android:padding="0dp"/>
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/b_minion_0_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="0dp"
+                    android:onClick="attackMinion"
+                    android:text="2\n3/3"/>
+
+                <TextView
+                    android:id="@+id/attack_bubble_0_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/damage_ring"
+                    android:translationZ="5dp"
+                    android:layout_margin="5dp"
+                    android:text="-1"/>
+
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -248,62 +401,194 @@
             android:weightSum="10"
             android:gravity="center">
 
-            <Button
-                android:id="@+id/b_minion_1_0"
+            <FrameLayout
+                android:id="@+id/slot_1_0"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:text="2\n3/3"/>
+                android:layout_weight="1">
 
-            <Button
-                android:id="@+id/b_minion_1_1"
+                <Button
+                    android:id="@+id/b_minion_1_0"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="0dp"
+                    android:onClick="selectMinion"
+                    android:text="2\n3/3"/>
+
+                <TextView
+                    android:id="@+id/attack_bubble_1_0"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/damage_ring"
+                    android:translationZ="5dp"
+                    android:layout_margin="5dp"
+                    android:text="-1"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/slot_1_1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:text="3\n4/4"/>
+                android:layout_weight="1">
 
-            <Button
-                android:id="@+id/b_minion_1_2"
+                <Button
+                    android:id="@+id/b_minion_1_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="0dp"
+                    android:onClick="selectMinion"
+                    android:text="2\n3/3"/>
+
+                <TextView
+                    android:id="@+id/attack_bubble_1_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/damage_ring"
+                    android:translationZ="5dp"
+                    android:layout_margin="5dp"
+                    android:text="-1"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/slot_1_2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="4\n5/4"
-                android:padding="0dp"/>
+                android:layout_weight="1">
 
-            <Button
-                android:id="@+id/b_minion_1_3"
+                <Button
+                    android:id="@+id/b_minion_1_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="0dp"
+                    android:onClick="selectMinion"
+                    android:text="2\n3/3"/>
+
+                <TextView
+                    android:id="@+id/attack_bubble_1_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/damage_ring"
+                    android:translationZ="5dp"
+                    android:layout_margin="5dp"
+                    android:text="-1"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/slot_1_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:text="5\n6/6"/>
+                android:layout_weight="1">
 
-            <Button
-                android:id="@+id/b_minion_1_4"
+                <Button
+                    android:id="@+id/b_minion_1_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="0dp"
+                    android:onClick="selectMinion"
+                    android:text="2\n3/3"/>
+
+                <TextView
+                    android:id="@+id/attack_bubble_1_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/damage_ring"
+                    android:translationZ="5dp"
+                    android:layout_margin="5dp"
+                    android:text="-1"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/slot_1_4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:text="6\n7/7"/>
+                android:layout_weight="1">
 
-            <Button
-                android:id="@+id/b_minion_1_5"
+                <Button
+                    android:id="@+id/b_minion_1_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="0dp"
+                    android:onClick="selectMinion"
+                    android:text="2\n3/3"/>
+
+                <TextView
+                    android:id="@+id/attack_bubble_1_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/damage_ring"
+                    android:translationZ="5dp"
+                    android:layout_margin="5dp"
+                    android:text="-1"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/slot_1_5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:text="6\n10/4"/>
+                android:layout_weight="1">
 
+                <Button
+                    android:id="@+id/b_minion_1_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="0dp"
+                    android:onClick="selectMinion"
+                    android:text="2\n3/3"/>
 
-            <Button
-                android:id="@+id/b_minion_1_6"
+                <TextView
+                    android:id="@+id/attack_bubble_1_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/damage_ring"
+                    android:translationZ="5dp"
+                    android:layout_margin="5dp"
+                    android:text="-1"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/slot_1_6"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="7\n3/12"
-                android:padding="0dp"/>
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/b_minion_1_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="0dp"
+                    android:onClick="selectMinion"
+                    android:text="2\n3/3"/>
+
+                <TextView
+                    android:id="@+id/attack_bubble_1_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/damage_ring"
+                    android:translationZ="5dp"
+                    android:layout_margin="5dp"
+                    android:text="-1"/>
+
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -340,11 +625,29 @@
 
             </LinearLayout>
 
-            <Button
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:text="30"/>
+            <FrameLayout
+                android:layout_width="70dp"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/b_hero_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:text="30"/>
+
+                <TextView
+                    android:id="@+id/attack_bubble_1_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/damage_ring"
+                    android:translationZ="5dp"
+                    android:layout_margin="5dp"
+                    android:text="-1"/>
+
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="0dp"

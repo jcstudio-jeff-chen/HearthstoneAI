@@ -24,6 +24,7 @@ public class Game {
     public int[] mana = {0, 0};
     private int[] maxMana = {0, 0};
     private int[] tiredAmount = {0, 0};
+    private int turn = 0;
 
     public Observer observer;
 
@@ -85,16 +86,24 @@ public class Game {
             observer.onCoinGained(1-turnSide, coin);
             observer.onInitialDrawFinished();
         }
+        turn++;
+        setManaForNewTurn();
+        drawCardForNewTurn();
+        if(observer != null){
+            observer.onSideChanged(turnSide);
+        }
     }
 
-    public void drawCard(int side){
+    private void drawCard(int side){
         ArrayList<Card> deck = decks.get(side);
         ArrayList<Card> handCard = handCards.get(side);
         if(deck.isEmpty()){
             tiredAmount[side]++;
             Log.d("Game", NAMES[side] + "疲勞傷害 " + tiredAmount[side] + " 點");
+            hp[side] -= tiredAmount[side];
             if(observer != null){
                 observer.onTired(side, tiredAmount[side]);
+                observer.onHeroDamaged(side, tiredAmount[side], hp[side]);
             }
             return;
         }
@@ -110,19 +119,30 @@ public class Game {
         Log.d("Game", NAMES[side] + "抽牌: " + c);
         handCard.add(c);
         if(observer != null){
-            observer.onCardDraw(side, c);
+            observer.onCardDraw(side, c, turn == 0);
         }
     }
 
     public void changeSide(){
         Log.d("Game", NAMES[1-turnSide] + "回合");
         turnSide = 1-turnSide;
+        turn++;
+        weakUpMinions();
+        setManaForNewTurn();
+        drawCardForNewTurn();
         if(observer != null){
             observer.onSideChanged(turnSide);
         }
     }
 
-    public void setMaxMana(int side, int value){
+    private void weakUpMinions(){
+        for(Minion m : minions.get(turnSide)){
+            m.isSleeping = false;
+            m.isResting = false;
+        }
+    }
+
+    private void setMaxMana(int side, int value){
         Log.d("Game", NAMES[side] + "水晶上限由 " + maxMana[side] + " 設為 " + value);
         if(value != maxMana[side]){
             maxMana[side] = value;
@@ -132,7 +152,7 @@ public class Game {
         }
     }
 
-    public void setMana(int side, int value){
+    private void setMana(int side, int value){
         Log.d("Game", NAMES[side] + "水晶由 " + mana[side] + " 設為 " + value);
         if(value != mana[side]){
             mana[side] = value;
@@ -149,17 +169,17 @@ public class Game {
         }
     }
 
-    public void fillMana(int side){
+    private void fillMana(int side){
         setMana(side, maxMana[side]);
     }
 
-    public void setManaForNewTurn(){
+    private void setManaForNewTurn(){
         int newMaxMana = Math.min(maxMana[turnSide]+1, 10);
         setMaxMana(turnSide, newMaxMana);
         fillMana(turnSide);
     }
 
-    public void drawCardForNewTurn(){
+    private void drawCardForNewTurn(){
         drawCard(turnSide);
     }
 
@@ -177,6 +197,10 @@ public class Game {
         }
 
         return c.cost <= mana[side];
+    }
+
+    public boolean isUsable(int side, int p) {
+        return p < handCards.get(side).size() && isUsable(side, handCards.get(side).get(p));
     }
 
     public void useCard(int i){
@@ -203,11 +227,139 @@ public class Game {
         }
     }
 
+    public boolean isMovable(int side, Minion minion){
+        return side == turnSide && !minion.isSleeping && !minion.isResting && minion.atk > 0;
+    }
+
+    public boolean isMovable(int side, int p) {
+        return p < minions.get(side).size() && isMovable(side, minions.get(side).get(p));
+    }
+
+    public boolean isMinionAttackable(int side, Minion m){
+        if(side == turnSide){
+            return false;
+        }
+        if(m.hasTaunt){
+            return true;
+        }
+        for(Minion m2 : minions.get(side)){
+            if(m2.hasTaunt){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isHeroAttackable(int side){
+        if(side == turnSide){
+            return false;
+        }
+        for(Minion m : minions.get(side)){
+            if(m.hasTaunt){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isAttackable(int side, int p) {
+        if (p == 7) {
+            return isHeroAttackable(side);
+        }
+        return p < minions.get(side).size() && isMinionAttackable(side, minions.get(side).get(p));
+    }
+
+    public void attack(int side, int p1, int p2){
+        int opponent = 1-side;
+        Minion attacker = minions.get(side).get(p1);
+        if(p2 == 7){
+            Log.d("GAME", NAMES[side] + "使用" + attacker + "攻擊" + NAMES[opponent] + "的英雄");
+            if(observer != null){
+                observer.onAttack(side, p1, p2, attacker, null);
+            }
+            hp[opponent] -= attacker.atk;
+            if(observer != null){
+                Log.d("Game", "onHeroDamaged, damage = " + attacker.atk + ", hp = " + hp[opponent]);
+                observer.onHeroDamaged(opponent, attacker.atk, hp[opponent]);
+            }
+            if(hp[opponent] <= 0){
+                Log.d("GAME", NAMES[opponent] + "的英雄死亡");
+                if(observer != null){
+                    observer.onHeroDead(opponent);
+                }
+            }
+        } else {
+            Minion attacked = minions.get(opponent).get(p2);
+            Log.d("GAME", NAMES[side] + "使用" + attacker + "攻擊" + NAMES[opponent] + "的" + attacked);
+            if(observer != null){
+                observer.onAttack(side, p1, p2, attacker, attacked);
+            }
+            attacked.currentHp -= attacker.atk;
+            if (observer != null) {
+                observer.onMinionDamaged(opponent, p2, attacked, attacker.atk, attacked.currentHp);
+            }
+            if (attacked.atk > 0) {
+                attacker.currentHp -= attacked.atk;
+                if (observer != null) {
+                    observer.onMinionDamaged(side, p1, attacker, attacked.atk, attacker.currentHp);
+                }
+            }
+            if (attacked.currentHp <= 0) {
+                Log.d("GAME", NAMES[opponent] + "的" + attacked + "死亡");
+                minions.get(opponent).remove(attacked);
+                if (observer != null) {
+                    observer.onMinionDead(opponent, p2, attacked);
+                }
+            }
+            if (attacker.currentHp <= 0) {
+                Log.d("GAME", NAMES[side] + "的" + attacker + "死亡");
+                minions.get(side).remove(attacker);
+                if (observer != null) {
+                    observer.onMinionDead(side, p1, attacker);
+                }
+            }
+        }
+        if(attacker.currentHp > 0) {
+            attacker.isResting = true;
+            if (observer != null) {
+                observer.onMinionRested(side, p1, attacker);
+            }
+        }
+    }
+
+    public boolean isActionAvailable(int side, int code){
+        if(code < 56){
+            int p1 = code/8;
+            int p2 = code%8;
+            return isMovable(side, p1) && isAttackable(1-side, p2);
+        }
+        if(code < 66){
+            int p = code-56;
+            return isUsable(side, p);
+        }
+        return true;
+    }
+
+    public void performAction(int code){
+        if(code < 56){
+            int p1 = code/8;
+            int p2 = code%8;
+            attack(turnSide, p1, p2);
+            return;
+        }
+        if(code < 66){
+            int p = code-56;
+            useCard(p);
+            return;
+        }
+        changeSide();
+    }
+
     public interface Observer {
         void onDeckPrepared();
         void onFirstHandDetermined(int side);
         void onCoinGained(int side, Card coin);
-        void onCardDraw(int side, Card card);
+        void onCardDraw(int side, Card card, boolean isInitialDraw);
         void onCardBurn(int side, Card card);
         void onTired(int side, int damage);
         void onManaChanged(int side, int mana);
@@ -216,5 +368,11 @@ public class Game {
         void onCardUsed(int side, int i, Card c);
         void onMinionSummoned(int side, Minion minion);
         void onSideChanged(int side);
+        void onHeroDamaged(int side, int damage, int hpAfterDamage);
+        void onMinionDamaged(int side, int p, Minion m, int damage, int hpAfterDamage);
+        void onHeroDead(int side);
+        void onMinionDead(int side, int p, Minion m);
+        void onMinionRested(int side, int p, Minion m);
+        void onAttack(int side, int p1, int p2, Minion m1, Minion m2);
     }
 }

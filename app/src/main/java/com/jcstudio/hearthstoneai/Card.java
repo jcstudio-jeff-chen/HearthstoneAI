@@ -52,9 +52,17 @@ public class Card {
     public static Card randomCard(int cost, double tauntRate){
         boolean hasTaunt = Math.random() < tauntRate;
         int totalValue = cost*2+2;
+        int hp;
+        int atk;
         Random r = new Random();
-        int hp = r.nextInt(totalValue-1)+1;
-        int atk = totalValue-hp-(hasTaunt ? 1:0);
+        if(hasTaunt){
+            hp = r.nextInt(totalValue) + 1;
+            atk = totalValue-hp;
+            hp = Math.round(hp * 0.8f);
+        } else {
+            hp = r.nextInt(totalValue - 1) + 1;
+            atk = totalValue - hp;
+        }
         return new Card(cost, atk, hp, hasTaunt);
     }
 }
