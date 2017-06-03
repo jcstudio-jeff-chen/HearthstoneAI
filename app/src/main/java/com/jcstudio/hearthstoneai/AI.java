@@ -1,5 +1,7 @@
 package com.jcstudio.hearthstoneai;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -9,7 +11,10 @@ import java.util.Collections;
  */
 
 public class AI {
-    public ArrayList<Integer> getActionList(){
+    public ArrayList<Integer> getActionList(double[] dataArray){
+        for(int i = 0; i < dataArray.length; i++){
+            Log.d("AI", "盤面參數[" + i + "] = " + dataArray[i]);
+        }
         ArrayList<Integer> actions = new ArrayList<>(67);
         for(int i = 0; i < 67; i++){
             actions.add(i);

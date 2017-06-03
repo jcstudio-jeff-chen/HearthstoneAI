@@ -56,12 +56,21 @@ public class Card {
         int atk;
         Random r = new Random();
         if(hasTaunt){
-            hp = r.nextInt(totalValue) + 1;
-            atk = totalValue-hp;
-            hp = Math.round(hp * 0.8f);
+            int tv = Math.round(totalValue*0.9f);
+            double range = tv-1;
+            double x = Math.random();
+            double a = x*x;
+            atk = (int) Math.round(a*range);
+            hp = tv-atk;
         } else {
-            hp = r.nextInt(totalValue - 1) + 1;
-            atk = totalValue - hp;
+            double range = totalValue-2;
+            double sum = 0;
+            for(int i = 0; i < 3; i++){
+                sum+=Math.random();
+            }
+            double a = sum/3;
+            atk = (int) Math.round(a*range) + 1;
+            hp = totalValue-atk;
         }
         return new Card(cost, atk, hp, hasTaunt);
     }

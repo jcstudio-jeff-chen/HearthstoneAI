@@ -35,6 +35,7 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
     private Button[] bHero = new Button[2];
     private AI ai;
     private boolean isBusy = false;
+    private BoardData boardData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,9 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
         ai = new AI();
 
         game = new Game();
-        game.observer = this;
+        boardData = new BoardData(game);
+        game.addObserver(this);
+        game.addObserver(boardData);
         game.resetMana();
         game.createDeck();
         game.shuffle();
@@ -212,7 +215,7 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
 
     private void actionForNewTurn(){
         if(game.turnSide == 0){
-            ArrayList<Integer> actions = ai.getActionList();
+            ArrayList<Integer> actions = ai.getActionList(boardData.createArray(0));
             for(int code : actions){
                 if(game.isActionAvailable(0, code)){
                     game.performAction(code);
