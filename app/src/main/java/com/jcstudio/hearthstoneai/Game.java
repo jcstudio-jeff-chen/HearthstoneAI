@@ -11,6 +11,8 @@ import java.util.Random;
  */
 
 public class Game {
+    public static final int POSSIBLE_ACTIONS = 67;
+
     public static final int UPPER = 0;
     public static final int DOWN = 1;
     public static final String NAMES[] = {"上家", "下家"};
@@ -113,6 +115,13 @@ public class Game {
             for(Observer observer:observers){
                 observer.onTired(side, tiredAmount[side]);
                 observer.onHeroDamaged(side, tiredAmount[side], hp[side]);
+            }
+
+            if(hp[side] <= 0){
+                Log.d("Game", NAMES[side] + "的英雄死亡");
+                for(Observer observer:observers){
+                    observer.onHeroDead(side);
+                }
             }
             return;
         }
@@ -282,24 +291,23 @@ public class Game {
         int opponent = 1-side;
         Minion attacker = minions.get(side).get(p1);
         if(p2 == 7){
-            Log.d("GAME", NAMES[side] + "使用" + attacker + "攻擊" + NAMES[opponent] + "的英雄");
+            Log.d("Game", NAMES[side] + "使用" + attacker + "攻擊" + NAMES[opponent] + "的英雄");
             for(Observer observer : observers){
                 observer.onAttack(side, p1, p2, attacker, null);
             }
             hp[opponent] -= attacker.atk;
-            Log.d("Game", "onHeroDamaged, damage = " + attacker.atk + ", hp = " + hp[opponent]);
             for(Observer observer : observers){
                 observer.onHeroDamaged(opponent, attacker.atk, hp[opponent]);
             }
             if(hp[opponent] <= 0){
-                Log.d("GAME", NAMES[opponent] + "的英雄死亡");
+                Log.d("Game", NAMES[opponent] + "的英雄死亡");
                 for(Observer observer : observers){
                     observer.onHeroDead(opponent);
                 }
             }
         } else {
             Minion attacked = minions.get(opponent).get(p2);
-            Log.d("GAME", NAMES[side] + "使用" + attacker + "攻擊" + NAMES[opponent] + "的" + attacked);
+            Log.d("Game", NAMES[side] + "使用" + attacker + "攻擊" + NAMES[opponent] + "的" + attacked);
             for(Observer observer : observers){
                 observer.onAttack(side, p1, p2, attacker, attacked);
             }
@@ -314,14 +322,14 @@ public class Game {
                 }
             }
             if (attacked.currentHp <= 0) {
-                Log.d("GAME", NAMES[opponent] + "的" + attacked + "死亡");
+                Log.d("Game", NAMES[opponent] + "的" + attacked + "死亡");
                 minions.get(opponent).remove(attacked);
                 for(Observer observer : observers){
                     observer.onMinionDead(opponent, p2, attacked);
                 }
             }
             if (attacker.currentHp <= 0) {
-                Log.d("GAME", NAMES[side] + "的" + attacker + "死亡");
+                Log.d("Game", NAMES[side] + "的" + attacker + "死亡");
                 minions.get(side).remove(attacker);
                 for(Observer observer : observers){
                     observer.onMinionDead(side, p1, attacker);
@@ -362,6 +370,10 @@ public class Game {
             return;
         }
         changeSide();
+    }
+
+    public boolean isOver(){
+        return hp[0] <= 0 || hp[1] <= 0;
     }
 
     public interface Observer {

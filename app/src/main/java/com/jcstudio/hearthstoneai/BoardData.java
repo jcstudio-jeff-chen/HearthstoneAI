@@ -24,6 +24,7 @@ public class BoardData implements Game.Observer{
 
     public BoardData(Game game) {
         this.game = game;
+        game.addObserver(this);
         for(int i = 0; i < 2; i++){
             lastCards.add(new ArrayList<Card>(REMEMBERED));
         }

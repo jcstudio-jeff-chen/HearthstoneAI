@@ -1,801 +1,818 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
     tools:context="com.jcstudio.hearthstoneai.TableActivity">
 
-    <LinearLayout
-        android:layout_width="0dp"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="left|center_vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="你的對手"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="left|center_vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="手牌："/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="你的對手"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"/>
 
-                <TextView
-                    android:id="@+id/tv_hand_card_size_0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="手牌："/>
+
+                    <TextView
+                        android:id="@+id/tv_hand_card_size_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5"/>
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/b_hero_0"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:onClick="attackHero"
+                        android:text="30"/>
+
+                    <TextView
+                        android:id="@+id/attack_bubble_0_7"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/damage_ring"
+                        android:translationZ="5dp"
+                        android:layout_margin="5dp"
+                        android:text="-1"/>
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="right|center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="水晶："/>
+
+                    <TextView
+                        android:id="@+id/tv_mana_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/"/>
+
+                    <TextView
+                        android:id="@+id/tv_max_mana_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_marginRight="16dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="牌堆："/>
+
+                    <TextView
+                        android:id="@+id/tv_deck_size_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="25"
+                        android:layout_marginRight="16dp"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <FrameLayout
-                android:layout_width="70dp"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:id="@+id/b_hero_0"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:onClick="attackHero"
-                    android:text="30"/>
-
-                <TextView
-                    android:id="@+id/attack_bubble_0_7"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/damage_ring"
-                    android:translationZ="5dp"
-                    android:layout_margin="5dp"
-                    android:text="-1"/>
-
-            </FrameLayout>
-
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:id="@+id/minion_field_0"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="right|center_vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="水晶："/>
-
-                <TextView
-                    android:id="@+id/tv_mana_0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="/"/>
-
-                <TextView
-                    android:id="@+id/tv_max_mana_0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:layout_marginRight="16dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="牌堆："/>
-
-                <TextView
-                    android:id="@+id/tv_deck_size_0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="25"
-                    android:layout_marginRight="16dp"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/minion_field_0"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:weightSum="10"
-            android:gravity="center">
-
-            <FrameLayout
-                android:id="@+id/slot_0_0"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/b_minion_0_0"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="0dp"
-                    android:onClick="attackMinion"
-                    android:text="2\n3/3"/>
-
-                <TextView
-                    android:id="@+id/attack_bubble_0_0"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/damage_ring"
-                    android:translationZ="5dp"
-                    android:layout_margin="5dp"
-                    android:text="-1"/>
-
-            </FrameLayout>
-
-
-
-            <FrameLayout
-                android:id="@+id/slot_0_1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/b_minion_0_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="0dp"
-                    android:onClick="attackMinion"
-                    android:text="2\n3/3"/>
-
-                <TextView
-                    android:id="@+id/attack_bubble_0_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/damage_ring"
-                    android:translationZ="5dp"
-                    android:layout_margin="5dp"
-                    android:text="-1"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/slot_0_2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/b_minion_0_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="0dp"
-                    android:onClick="attackMinion"
-                    android:text="2\n3/3"/>
-
-                <TextView
-                    android:id="@+id/attack_bubble_0_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/damage_ring"
-                    android:translationZ="5dp"
-                    android:layout_margin="5dp"
-                    android:text="-1"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/slot_0_3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/b_minion_0_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="0dp"
-                    android:onClick="attackMinion"
-                    android:text="2\n3/3"/>
-
-                <TextView
-                    android:id="@+id/attack_bubble_0_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/damage_ring"
-                    android:translationZ="5dp"
-                    android:layout_margin="5dp"
-                    android:text="-1"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/slot_0_4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/b_minion_0_4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="0dp"
-                    android:onClick="attackMinion"
-                    android:text="2\n3/3"/>
-
-                <TextView
-                    android:id="@+id/attack_bubble_0_4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/damage_ring"
-                    android:translationZ="5dp"
-                    android:layout_margin="5dp"
-                    android:text="-1"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/slot_0_5"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/b_minion_0_5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="0dp"
-                    android:onClick="attackMinion"
-                    android:text="2\n3/3"/>
-
-                <TextView
-                    android:id="@+id/attack_bubble_0_5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/damage_ring"
-                    android:translationZ="5dp"
-                    android:layout_margin="5dp"
-                    android:text="-1"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/slot_0_6"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/b_minion_0_6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="0dp"
-                    android:onClick="attackMinion"
-                    android:text="2\n3/3"/>
-
-                <TextView
-                    android:id="@+id/attack_bubble_0_6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/damage_ring"
-                    android:translationZ="5dp"
-                    android:layout_margin="5dp"
-                    android:text="-1"/>
-
-            </FrameLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal"
+                android:weightSum="10"
                 android:gravity="center">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="上方 AI 第 "/>
+                <FrameLayout
+                    android:id="@+id/slot_0_0"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1"/>
+                    <Button
+                        android:id="@+id/b_minion_0_0"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:onClick="attackMinion"
+                        android:text="2\n3/3"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" 世代 編號："/>
+                    <TextView
+                        android:id="@+id/attack_bubble_0_0"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/damage_ring"
+                        android:translationZ="5dp"
+                        android:layout_margin="5dp"
+                        android:text="-1"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="32"/>
+                </FrameLayout>
 
+
+
+                <FrameLayout
+                    android:id="@+id/slot_0_1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/b_minion_0_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:onClick="attackMinion"
+                        android:text="2\n3/3"/>
+
+                    <TextView
+                        android:id="@+id/attack_bubble_0_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/damage_ring"
+                        android:translationZ="5dp"
+                        android:layout_margin="5dp"
+                        android:text="-1"/>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/slot_0_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/b_minion_0_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:onClick="attackMinion"
+                        android:text="2\n3/3"/>
+
+                    <TextView
+                        android:id="@+id/attack_bubble_0_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/damage_ring"
+                        android:translationZ="5dp"
+                        android:layout_margin="5dp"
+                        android:text="-1"/>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/slot_0_3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/b_minion_0_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:onClick="attackMinion"
+                        android:text="2\n3/3"/>
+
+                    <TextView
+                        android:id="@+id/attack_bubble_0_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/damage_ring"
+                        android:translationZ="5dp"
+                        android:layout_margin="5dp"
+                        android:text="-1"/>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/slot_0_4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/b_minion_0_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:onClick="attackMinion"
+                        android:text="2\n3/3"/>
+
+                    <TextView
+                        android:id="@+id/attack_bubble_0_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/damage_ring"
+                        android:translationZ="5dp"
+                        android:layout_margin="5dp"
+                        android:text="-1"/>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/slot_0_5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/b_minion_0_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:onClick="attackMinion"
+                        android:text="2\n3/3"/>
+
+                    <TextView
+                        android:id="@+id/attack_bubble_0_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/damage_ring"
+                        android:translationZ="5dp"
+                        android:layout_margin="5dp"
+                        android:text="-1"/>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/slot_0_6"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/b_minion_0_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:onClick="attackMinion"
+                        android:text="2\n3/3"/>
+
+                    <TextView
+                        android:id="@+id/attack_bubble_0_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/damage_ring"
+                        android:translationZ="5dp"
+                        android:layout_margin="5dp"
+                        android:text="-1"/>
+
+                </FrameLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="上方 AI 第 "/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" 世代 編號："/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="32"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="下方 AI 第 "/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" 世代 編號："/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5"/>
+
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/b_finish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="結束回合"
+                    android:onClick="finishTurn"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/minion_field_1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="10"
                 android:gravity="center">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="下方 AI 第 "/>
+                <FrameLayout
+                    android:id="@+id/slot_1_0"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1"/>
+                    <Button
+                        android:id="@+id/b_minion_1_0"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:onClick="selectMinion"
+                        android:text="2\n3/3"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" 世代 編號："/>
+                    <TextView
+                        android:id="@+id/attack_bubble_1_0"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/damage_ring"
+                        android:translationZ="5dp"
+                        android:layout_margin="5dp"
+                        android:text="-1"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5"/>
+                </FrameLayout>
 
+                <FrameLayout
+                    android:id="@+id/slot_1_1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/b_minion_1_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:onClick="selectMinion"
+                        android:text="2\n3/3"/>
+
+                    <TextView
+                        android:id="@+id/attack_bubble_1_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/damage_ring"
+                        android:translationZ="5dp"
+                        android:layout_margin="5dp"
+                        android:text="-1"/>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/slot_1_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/b_minion_1_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:onClick="selectMinion"
+                        android:text="2\n3/3"/>
+
+                    <TextView
+                        android:id="@+id/attack_bubble_1_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/damage_ring"
+                        android:translationZ="5dp"
+                        android:layout_margin="5dp"
+                        android:text="-1"/>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/slot_1_3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/b_minion_1_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:onClick="selectMinion"
+                        android:text="2\n3/3"/>
+
+                    <TextView
+                        android:id="@+id/attack_bubble_1_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/damage_ring"
+                        android:translationZ="5dp"
+                        android:layout_margin="5dp"
+                        android:text="-1"/>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/slot_1_4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/b_minion_1_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:onClick="selectMinion"
+                        android:text="2\n3/3"/>
+
+                    <TextView
+                        android:id="@+id/attack_bubble_1_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/damage_ring"
+                        android:translationZ="5dp"
+                        android:layout_margin="5dp"
+                        android:text="-1"/>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/slot_1_5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/b_minion_1_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:onClick="selectMinion"
+                        android:text="2\n3/3"/>
+
+                    <TextView
+                        android:id="@+id/attack_bubble_1_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/damage_ring"
+                        android:translationZ="5dp"
+                        android:layout_margin="5dp"
+                        android:text="-1"/>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/slot_1_6"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/b_minion_1_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:onClick="selectMinion"
+                        android:text="2\n3/3"/>
+
+                    <TextView
+                        android:id="@+id/attack_bubble_1_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/damage_ring"
+                        android:translationZ="5dp"
+                        android:layout_margin="5dp"
+                        android:text="-1"/>
+
+                </FrameLayout>
 
             </LinearLayout>
-
-            <Button
-                android:id="@+id/b_finish"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="結束回合"
-                android:onClick="finishTurn"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/minion_field_1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:weightSum="10"
-            android:gravity="center">
-
-            <FrameLayout
-                android:id="@+id/slot_1_0"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/b_minion_1_0"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="0dp"
-                    android:onClick="selectMinion"
-                    android:text="2\n3/3"/>
-
-                <TextView
-                    android:id="@+id/attack_bubble_1_0"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/damage_ring"
-                    android:translationZ="5dp"
-                    android:layout_margin="5dp"
-                    android:text="-1"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/slot_1_1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/b_minion_1_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="0dp"
-                    android:onClick="selectMinion"
-                    android:text="2\n3/3"/>
-
-                <TextView
-                    android:id="@+id/attack_bubble_1_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/damage_ring"
-                    android:translationZ="5dp"
-                    android:layout_margin="5dp"
-                    android:text="-1"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/slot_1_2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/b_minion_1_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="0dp"
-                    android:onClick="selectMinion"
-                    android:text="2\n3/3"/>
-
-                <TextView
-                    android:id="@+id/attack_bubble_1_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/damage_ring"
-                    android:translationZ="5dp"
-                    android:layout_margin="5dp"
-                    android:text="-1"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/slot_1_3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/b_minion_1_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="0dp"
-                    android:onClick="selectMinion"
-                    android:text="2\n3/3"/>
-
-                <TextView
-                    android:id="@+id/attack_bubble_1_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/damage_ring"
-                    android:translationZ="5dp"
-                    android:layout_margin="5dp"
-                    android:text="-1"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/slot_1_4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/b_minion_1_4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="0dp"
-                    android:onClick="selectMinion"
-                    android:text="2\n3/3"/>
-
-                <TextView
-                    android:id="@+id/attack_bubble_1_4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/damage_ring"
-                    android:translationZ="5dp"
-                    android:layout_margin="5dp"
-                    android:text="-1"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/slot_1_5"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/b_minion_1_5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="0dp"
-                    android:onClick="selectMinion"
-                    android:text="2\n3/3"/>
-
-                <TextView
-                    android:id="@+id/attack_bubble_1_5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/damage_ring"
-                    android:translationZ="5dp"
-                    android:layout_margin="5dp"
-                    android:text="-1"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/slot_1_6"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/b_minion_1_6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="0dp"
-                    android:onClick="selectMinion"
-                    android:text="2\n3/3"/>
-
-                <TextView
-                    android:id="@+id/attack_bubble_1_6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/damage_ring"
-                    android:translationZ="5dp"
-                    android:layout_margin="5dp"
-                    android:text="-1"/>
-
-            </FrameLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="left|center_vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="你"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="left|center_vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="手牌："/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="你"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"/>
 
-                <TextView
-                    android:id="@+id/tv_hand_card_size_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="手牌："/>
+
+                    <TextView
+                        android:id="@+id/tv_hand_card_size_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10"/>
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/b_hero_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:text="30"/>
+
+                    <TextView
+                        android:id="@+id/attack_bubble_1_7"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/damage_ring"
+                        android:translationZ="5dp"
+                        android:layout_margin="5dp"
+                        android:text="-1"/>
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="right|center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="水晶："/>
+
+                    <TextView
+                        android:id="@+id/tv_mana_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/"/>
+
+                    <TextView
+                        android:id="@+id/tv_max_mana_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_marginRight="16dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="牌堆："/>
+
+                    <TextView
+                        android:id="@+id/tv_deck_size_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="21"
+                        android:layout_marginRight="16dp"/>
+
+                </LinearLayout>
 
             </LinearLayout>
-
-            <FrameLayout
-                android:layout_width="70dp"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:id="@+id/b_hero_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:text="30"/>
-
-                <TextView
-                    android:id="@+id/attack_bubble_1_7"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/damage_ring"
-                    android:translationZ="5dp"
-                    android:layout_margin="5dp"
-                    android:text="-1"/>
-
-            </FrameLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:id="@+id/card_field"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="right|center_vertical">
+                android:weightSum="10"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="水晶："/>
+                <Button
+                    android:id="@+id/b_card_0"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="0dp"
+                    android:onClick="useCard"
+                    android:text="幣"/>
 
-                <TextView
-                    android:id="@+id/tv_mana_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"/>
+                <Button
+                    android:id="@+id/b_card_1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="0dp"
+                    android:onClick="useCard"
+                    android:text="2\n3/3"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="/"/>
+                <Button
+                    android:id="@+id/b_card_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="0dp"
+                    android:onClick="useCard"
+                    android:text="3\n4/4"/>
 
-                <TextView
-                    android:id="@+id/tv_max_mana_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:layout_marginRight="16dp"/>
+                <Button
+                    android:id="@+id/b_card_3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="4\n5/4"
+                    android:onClick="useCard"
+                    android:padding="0dp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="牌堆："/>
+                <Button
+                    android:id="@+id/b_card_4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="0dp"
+                    android:onClick="useCard"
+                    android:text="5\n6/6"/>
 
-                <TextView
-                    android:id="@+id/tv_deck_size_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="21"
-                    android:layout_marginRight="16dp"/>
+                <Button
+                    android:id="@+id/b_card_5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="0dp"
+                    android:onClick="useCard"
+                    android:text="6\n7/7"/>
+
+                <Button
+                    android:id="@+id/b_card_6"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="7\n3/12"
+                    android:onClick="useCard"
+                    android:padding="0dp"/>
+
+                <Button
+                    android:id="@+id/b_card_7"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="0dp"
+                    android:onClick="useCard"
+                    android:text="8\n9/9"/>
+
+                <Button
+                    android:id="@+id/b_card_8"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="0dp"
+                    android:onClick="useCard"
+                    android:text="9\n10/10"/>
+
+                <Button
+                    android:id="@+id/b_card_9"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="0dp"
+                    android:onClick="useCard"
+                    android:text="10\n11/11"/>
 
             </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/card_field"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:weightSum="10"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/b_card_0"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:onClick="useCard"
-                android:text="幣"/>
-
-            <Button
-                android:id="@+id/b_card_1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:onClick="useCard"
-                android:text="2\n3/3"/>
-
-            <Button
-                android:id="@+id/b_card_2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:onClick="useCard"
-                android:text="3\n4/4"/>
-
-            <Button
-                android:id="@+id/b_card_3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="4\n5/4"
-                android:onClick="useCard"
-                android:padding="0dp"/>
-
-            <Button
-                android:id="@+id/b_card_4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:onClick="useCard"
-                android:text="5\n6/6"/>
-
-            <Button
-                android:id="@+id/b_card_5"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:onClick="useCard"
-                android:text="6\n7/7"/>
-
-            <Button
-                android:id="@+id/b_card_6"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="7\n3/12"
-                android:onClick="useCard"
-                android:padding="0dp"/>
-
-            <Button
-                android:id="@+id/b_card_7"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:onClick="useCard"
-                android:text="8\n9/9"/>
-
-            <Button
-                android:id="@+id/b_card_8"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:onClick="useCard"
-                android:text="9\n10/10"/>
-
-            <Button
-                android:id="@+id/b_card_9"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:onClick="useCard"
-                android:text="10\n11/11"/>
 
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_turn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@android:color/white"
+        android:text="@string/your_turn"
+        android:textSize="60sp"
+        android:shadowRadius="20"
+        android:shadowColor="@android:color/black"/>
+
+</FrameLayout>

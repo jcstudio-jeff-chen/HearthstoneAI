@@ -11,10 +11,24 @@ import java.util.Collections;
  */
 
 public class AI {
+    public NeuralNetwork neuralNetwork;
+
+    public static int nHiddenLayerNodes(){
+        return (BoardData.arraySize() + Game.POSSIBLE_ACTIONS)/2;
+    }
+
+    public AI(){
+        neuralNetwork = new NeuralNetwork();
+        neuralNetwork.addLayer(new Layer(BoardData.arraySize(), nHiddenLayerNodes()));
+        neuralNetwork.addLayer(new Layer(nHiddenLayerNodes(), Game.POSSIBLE_ACTIONS));
+    }
+
+    public AI(double[] param){
+        this();
+        neuralNetwork.applyParams(param);
+    }
+
     public ArrayList<Integer> getActionList(double[] dataArray){
-        for(int i = 0; i < dataArray.length; i++){
-            Log.d("AI", "盤面參數[" + i + "] = " + dataArray[i]);
-        }
         ArrayList<Integer> actions = new ArrayList<>(67);
         for(int i = 0; i < 67; i++){
             actions.add(i);

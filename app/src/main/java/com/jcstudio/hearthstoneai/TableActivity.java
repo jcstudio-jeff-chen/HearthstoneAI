@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,16 +34,24 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
     private int selectedMinion;
     private FrameLayout[][] slot = new FrameLayout[2][7];
     private Button[] bHero = new Button[2];
-    private AI ai;
+    private AI[] ai;
     private boolean isBusy = false;
     private BoardData boardData;
+    private boolean isCvc = false;
+    private TextView tvTurn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        double[] aiParam0 = getIntent().getDoubleArrayExtra("ai_param_0");
+        double[] aiParam1 = getIntent().getDoubleArrayExtra("ai_param_1");
+        isCvc = aiParam1 != null;
+
         setContentView(R.layout.activity_table);
 
         findViews();
+
+        tvTurn.setVisibility(View.INVISIBLE);
 
         for(TextView[] tvs : attackBubble){
             for(TextView tv : tvs){
@@ -50,12 +59,15 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
             }
         }
 
-        ai = new AI();
+        if(isCvc){
+            ai = new AI[]{new AI(), new AI()};
+        } else {
+            ai = new AI[]{new AI()};
+        }
 
         game = new Game();
         boardData = new BoardData(game);
         game.addObserver(this);
-        game.addObserver(boardData);
         game.resetMana();
         game.createDeck();
         game.shuffle();
@@ -132,17 +144,18 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
         slot[1][6] = (FrameLayout) findViewById(R.id.slot_1_6);
         bHero[0] = (Button) findViewById(R.id.b_hero_0);
         bHero[1] = (Button) findViewById(R.id.b_hero_1);
+        tvTurn = (TextView) findViewById(R.id.tv_turn);
     }
 
     public void finishTurn(View v){
-        if(isBusy){
+        if(isBusy || isCvc || game.isOver()){
             return;
         }
         changeSide();
     }
 
     public void useCard(View v){
-        if(isBusy){
+        if(isBusy || isCvc || game.isOver()){
             return;
         }
         if(game.turnSide != 1){
@@ -152,7 +165,7 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
     }
 
     public void selectMinion(View v){
-        if(isBusy){
+        if(isBusy || isCvc || game.isOver()){
             return;
         }
         int n = minionField[1].indexOfChild((View) v.getParent());
@@ -169,7 +182,7 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
     }
 
     public void attackMinion(View v){
-        if(isBusy){
+        if(isBusy || isCvc || game.isOver()){
             return;
         }
         int n = minionField[0].indexOfChild((View) v.getParent());
@@ -178,11 +191,36 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
     }
 
     public void attackHero(View v){
-        if(isBusy){
+        if(isBusy || isCvc || game.isOver()){
             return;
         }
         game.attack(1, selectedMinion, 7);
         setSelectedMinion(-1);
+    }
+
+    private void showSideChangeAnim(int side){
+        tvTurn.setVisibility(View.VISIBLE);
+        tvTurn.setText(side == 1 ? "你的回合" : "對手回合");
+        Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                tvTurn.setVisibility(View.INVISIBLE);
+                isBusy = false;
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        isBusy = true;
+        tvTurn.startAnimation(fadeOut);
     }
 
     private void changeSide(){
@@ -214,20 +252,23 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
     }
 
     private void actionForNewTurn(){
-        if(game.turnSide == 0){
-            ArrayList<Integer> actions = ai.getActionList(boardData.createArray(0));
+        int side = game.turnSide;
+        if((side == 0 || isCvc) && !game.isOver()){
+            ArrayList<Integer> actions = ai[side].getActionList(boardData.createArray(side));
             for(int code : actions){
-                if(game.isActionAvailable(0, code)){
+                if(game.isActionAvailable(side, code)){
                     game.performAction(code);
                     break;
                 }
             }
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    actionForNewTurn();
-                }
-            }, 1100);
+            if(game.turnSide == side) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        actionForNewTurn();
+                    }
+                }, 1100);
+            }
         }
     }
 
@@ -387,7 +428,8 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
     @Override
     public void onSideChanged(int side) {
         refreshFinishButton(side);
-        if(side != 1){
+        showSideChangeAnim(side);
+        if(side == 0){
             for(Button b : bCard){
                 b.setEnabled(false);
             }
@@ -408,7 +450,12 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
                 bMinion[1][i].setEnabled(game.isMovable(1, i));
             }
         }
-        actionForNewTurn();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                actionForNewTurn();
+            }
+        }, 1100);
     }
 
     @Override
@@ -425,7 +472,7 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
 
     @Override
     public void onHeroDead(int side) {
-
+        new AlertDialog.Builder(this).setTitle("遊戲結束").setMessage(Game.NAMES[1-side] + "獲勝！").show();
     }
 
     @Override
@@ -485,14 +532,14 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
     }
 
     @Override
-    public void onAttack(int side, final int p1, int p2, final Minion m1, Minion m2) {
-        if(side == 0) {
-            bMinion[0][p1].getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+    public void onAttack(final int side, final int p1, int p2, final Minion m1, Minion m2) {
+        if(side == 0 || isCvc) {
+            bMinion[side][p1].getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     if (m1.currentHp > 0) {
-                        bMinion[0][p1].getBackground().setColorFilter(m1.filterColor(), PorterDuff.Mode.SRC_ATOP);
+                        bMinion[side][p1].getBackground().setColorFilter(m1.filterColor(), PorterDuff.Mode.SRC_ATOP);
                     }
                 }
             }, 600);

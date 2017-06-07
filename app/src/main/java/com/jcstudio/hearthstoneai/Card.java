@@ -51,27 +51,22 @@ public class Card {
 
     public static Card randomCard(int cost, double tauntRate){
         boolean hasTaunt = Math.random() < tauntRate;
-        int totalValue = cost*2+2;
+        int totalValue = (int) Math.round((cost*2+(hasTaunt ? 1:2))*(hasTaunt ? 0.9 : 1));
         int hp;
         int atk;
-        Random r = new Random();
-        if(hasTaunt){
-            int tv = Math.round(totalValue*0.9f);
-            double range = tv-1;
-            double x = Math.random();
-            double a = x*x;
-            atk = (int) Math.round(a*range);
-            hp = tv-atk;
-        } else {
-            double range = totalValue-2;
-            double sum = 0;
-            for(int i = 0; i < 3; i++){
-                sum+=Math.random();
-            }
-            double a = sum/3;
-            atk = (int) Math.round(a*range) + 1;
-            hp = totalValue-atk;
+        double range = totalValue - (hasTaunt ? 1:2);
+        double sum = 0;
+        for(int i = 0; i < 3; i++){
+            sum+=Math.random();
         }
+        double a = sum/3;
+        if(hasTaunt){
+            a *= a;
+        }
+
+        atk = (int) Math.round(a*(range+1)-0.5) + (hasTaunt ? 0:1);
+        hp = totalValue-atk;
+
         return new Card(cost, atk, hp, hasTaunt);
     }
 }

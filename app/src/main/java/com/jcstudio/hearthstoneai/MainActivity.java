@@ -16,11 +16,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void playWithAI(View v){
         Intent intent = new Intent(this, TableActivity.class);
+        intent.putExtra("ai_param_0", new double[100]);
         startActivity(intent);
     }
 
-    public void aiLearn(View v){
+    public void aiFight(View v){
         Intent intent = new Intent(this, TableActivity.class);
+        intent.putExtra("ai_param_0", new double[100]);
+        intent.putExtra("ai_param_1", new double[100]);
         startActivity(intent);
     }
 
