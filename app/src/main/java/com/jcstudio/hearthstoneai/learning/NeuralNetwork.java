@@ -1,4 +1,6 @@
-package com.jcstudio.hearthstoneai;
+package com.jcstudio.hearthstoneai.learning;
+
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -31,6 +33,10 @@ public class NeuralNetwork {
 
     public int nParam(){
         int result = 0;
+        for(Layer layer : layers){
+            result += layer.nParam();
+        }
+        Log.d("NeuralNetwork", "nParameter = " + result);
         return result;
     }
 }

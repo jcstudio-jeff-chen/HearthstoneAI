@@ -39,17 +39,36 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
     private BoardData boardData;
     private boolean isCvc = false;
     private TextView tvTurn;
+    private TextView[] tvGeneration = new TextView[2];
+    private TextView[] tvSn = new TextView[2];
+    private View blockIsNotHuman;
+    private View tvIsHuman;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        boolean isRandomTest = getIntent().getBooleanExtra("is_random_test", false);
         double[] aiParam0 = getIntent().getDoubleArrayExtra("ai_param_0");
         double[] aiParam1 = getIntent().getDoubleArrayExtra("ai_param_1");
+        int[] sn = new int[2];
+        int generation = getIntent().getIntExtra("generation", -1);
+        sn[0] = getIntent().getIntExtra("sn_0", -1);
+        sn[1] = getIntent().getIntExtra("sn_1", -1);
         isCvc = aiParam1 != null;
 
         setContentView(R.layout.activity_table);
 
         findViews();
+
+        for(int i = 0; i < 2; i++){
+            tvGeneration[i].setText(String.valueOf(generation));
+            tvSn[i].setText(String.valueOf(sn[i]));
+        }
+
+        if(isRandomTest){
+            tvGeneration[1].setText("0");
+            tvSn[1].setText("無");
+        }
 
         tvTurn.setVisibility(View.INVISIBLE);
 
@@ -60,9 +79,13 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
         }
 
         if(isCvc){
-            ai = new AI[]{new AI(), new AI()};
+            ai = new AI[]{new AI(aiParam0), new AI(aiParam1)};
+            tvIsHuman.setVisibility(View.INVISIBLE);
+            blockIsNotHuman.setVisibility(View.VISIBLE);
         } else {
-            ai = new AI[]{new AI()};
+            ai = new AI[]{new AI(aiParam0)};
+            tvIsHuman.setVisibility(View.VISIBLE);
+            blockIsNotHuman.setVisibility(View.INVISIBLE);
         }
 
         game = new Game();
@@ -145,6 +168,12 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
         bHero[0] = (Button) findViewById(R.id.b_hero_0);
         bHero[1] = (Button) findViewById(R.id.b_hero_1);
         tvTurn = (TextView) findViewById(R.id.tv_turn);
+        tvGeneration[0] = (TextView) findViewById(R.id.tv_gen_0);
+        tvGeneration[1] = (TextView) findViewById(R.id.tv_gen_1);
+        tvSn[0] = (TextView) findViewById(R.id.tv_sn_0);
+        tvSn[1] = (TextView) findViewById(R.id.tv_sn_1);
+        blockIsNotHuman = findViewById(R.id.block_is_not_human);
+        tvIsHuman = findViewById(R.id.tv_is_human);
     }
 
     public void finishTurn(View v){
@@ -267,7 +296,7 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
                     public void run() {
                         actionForNewTurn();
                     }
-                }, 1100);
+                }, 1200);
             }
         }
     }

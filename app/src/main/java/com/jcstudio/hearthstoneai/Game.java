@@ -12,6 +12,7 @@ import java.util.Random;
 
 public class Game {
     public static final int POSSIBLE_ACTIONS = 67;
+    public static boolean debugging = false;
 
     public static final int UPPER = 0;
     public static final int DOWN = 1;
@@ -46,7 +47,9 @@ public class Game {
     }
 
     public void createDeck(){
-        Log.d("Game", "產生套牌");
+        if(debugging) {
+            Log.d("Game", "產生套牌");
+        }
         String name = NAMES[0];
         for(ArrayList<Card> deck : decks){
             deck.clear();
@@ -54,7 +57,9 @@ public class Game {
                 for(int j = 0; j < 3; j++){
                     Card c = Card.randomCard(i+1, 0.3);
                     deck.add(c);
-                    Log.d("Game", name + ": " + c);
+                    if(debugging) {
+                        Log.d("Game", name + ": " + c);
+                    }
                 }
             }
             name = NAMES[1];
@@ -62,7 +67,9 @@ public class Game {
     }
 
     public void shuffle(){
-        Log.d("Game", "洗牌");
+        if(debugging) {
+            Log.d("Game", "洗牌");
+        }
         for(ArrayList<Card> deck : decks){
             Collections.shuffle(deck);
         }
@@ -74,7 +81,9 @@ public class Game {
     public void initialDraw(){
         Random r = new Random();
         turnSide = r.nextInt(2);
-        Log.d("Game", NAMES[turnSide] + "先手");
+        if(debugging) {
+            Log.d("Game", NAMES[turnSide] + "先手");
+        }
         firstHand = turnSide;
         for(Observer observer : observers){
             observer.onFirstHandDetermined(turnSide);
@@ -87,9 +96,13 @@ public class Game {
                 drawCard(i);
             }
         }
-        Log.d("Game", "後手多抽一張");
+        if(debugging) {
+            Log.d("Game", "後手多抽一張");
+        }
         drawCard(1-turnSide);
-        Log.d("Game", "後手獲得幸運幣");
+        if(debugging) {
+            Log.d("Game", "後手獲得幸運幣");
+        }
         Card coin = new Card();
         handCards.get(1-turnSide).add(coin);
         for(Observer observer: observers){
@@ -109,7 +122,9 @@ public class Game {
         ArrayList<Card> handCard = handCards.get(side);
         if(deck.isEmpty()){
             tiredAmount[side]++;
-            Log.d("Game", NAMES[side] + "疲勞傷害 " + tiredAmount[side] + " 點");
+            if(debugging){
+                Log.d("Game", NAMES[side] + "疲勞傷害 " + tiredAmount[side] + " 點");
+            }
             hp[side] -= tiredAmount[side];
 
             for(Observer observer:observers){
@@ -118,7 +133,9 @@ public class Game {
             }
 
             if(hp[side] <= 0){
-                Log.d("Game", NAMES[side] + "的英雄死亡");
+                if(debugging) {
+                    Log.d("Game", NAMES[side] + "的英雄死亡");
+                }
                 for(Observer observer:observers){
                     observer.onHeroDead(side);
                 }
@@ -127,14 +144,18 @@ public class Game {
         }
         Card c = deck.remove(0);
         if(handCard.size() == 10){
-            Log.d("Game", NAMES[side] + "爆牌: " + c);
+            if(debugging) {
+                Log.d("Game", NAMES[side] + "爆牌: " + c);
+            }
             for(Observer observer : observers){
                 observer.onCardBurn(side, c);
             }
             return;
         }
 
-        Log.d("Game", NAMES[side] + "抽牌: " + c);
+        if(debugging) {
+            Log.d("Game", NAMES[side] + "抽牌: " + c);
+        }
         handCard.add(c);
         for(Observer observer : observers){
             observer.onCardDraw(side, c, turn == 0);
@@ -142,7 +163,9 @@ public class Game {
     }
 
     public void changeSide(){
-        Log.d("Game", NAMES[1-turnSide] + "回合");
+        if(debugging) {
+            Log.d("Game", NAMES[1 - turnSide] + "回合");
+        }
         turnSide = 1-turnSide;
         turn++;
         weakUpMinions();
@@ -161,7 +184,9 @@ public class Game {
     }
 
     private void setMaxMana(int side, int value){
-        Log.d("Game", NAMES[side] + "水晶上限由 " + maxMana[side] + " 設為 " + value);
+        if(debugging) {
+            Log.d("Game", NAMES[side] + "水晶上限由 " + maxMana[side] + " 設為 " + value);
+        }
         if(value != maxMana[side]){
             maxMana[side] = value;
             for(Observer observer : observers){
@@ -171,7 +196,9 @@ public class Game {
     }
 
     private void setMana(int side, int value){
-        Log.d("Game", NAMES[side] + "水晶由 " + mana[side] + " 設為 " + value);
+        if(debugging) {
+            Log.d("Game", NAMES[side] + "水晶由 " + mana[side] + " 設為 " + value);
+        }
         if(value != mana[side]){
             mana[side] = value;
             for(Observer observer : observers){
@@ -223,7 +250,9 @@ public class Game {
 
     public void useCard(int i){
         Card c = handCards.get(turnSide).remove(i);
-        Log.d("Game", NAMES[turnSide] + "使用第 " + i + " 張手牌：" + c);
+        if(debugging) {
+            Log.d("Game", NAMES[turnSide] + "使用第 " + i + " 張手牌：" + c);
+        }
         for(Observer observer : observers){
             observer.onCardUsed(turnSide, i, c);
         }
@@ -238,7 +267,9 @@ public class Game {
     }
 
     private void putMinion(int side, Minion minion){
-        Log.d("Game", NAMES[turnSide] + "將" + minion + "放到場上");
+        if(debugging) {
+            Log.d("Game", NAMES[turnSide] + "將" + minion + "放到場上");
+        }
         minions.get(side).add(minion);
         for(Observer observer : observers){
             observer.onMinionSummoned(side, minion);
@@ -291,7 +322,9 @@ public class Game {
         int opponent = 1-side;
         Minion attacker = minions.get(side).get(p1);
         if(p2 == 7){
-            Log.d("Game", NAMES[side] + "使用" + attacker + "攻擊" + NAMES[opponent] + "的英雄");
+            if(debugging) {
+                Log.d("Game", NAMES[side] + "使用" + attacker + "攻擊" + NAMES[opponent] + "的英雄");
+            }
             for(Observer observer : observers){
                 observer.onAttack(side, p1, p2, attacker, null);
             }
@@ -300,14 +333,18 @@ public class Game {
                 observer.onHeroDamaged(opponent, attacker.atk, hp[opponent]);
             }
             if(hp[opponent] <= 0){
-                Log.d("Game", NAMES[opponent] + "的英雄死亡");
+                if(debugging) {
+                    Log.d("Game", NAMES[opponent] + "的英雄死亡");
+                }
                 for(Observer observer : observers){
                     observer.onHeroDead(opponent);
                 }
             }
         } else {
             Minion attacked = minions.get(opponent).get(p2);
-            Log.d("Game", NAMES[side] + "使用" + attacker + "攻擊" + NAMES[opponent] + "的" + attacked);
+            if(debugging) {
+                Log.d("Game", NAMES[side] + "使用" + attacker + "攻擊" + NAMES[opponent] + "的" + attacked);
+            }
             for(Observer observer : observers){
                 observer.onAttack(side, p1, p2, attacker, attacked);
             }
@@ -322,14 +359,18 @@ public class Game {
                 }
             }
             if (attacked.currentHp <= 0) {
-                Log.d("Game", NAMES[opponent] + "的" + attacked + "死亡");
+                if(debugging) {
+                    Log.d("Game", NAMES[opponent] + "的" + attacked + "死亡");
+                }
                 minions.get(opponent).remove(attacked);
                 for(Observer observer : observers){
                     observer.onMinionDead(opponent, p2, attacked);
                 }
             }
             if (attacker.currentHp <= 0) {
-                Log.d("Game", NAMES[side] + "的" + attacker + "死亡");
+                if(debugging) {
+                    Log.d("Game", NAMES[side] + "的" + attacker + "死亡");
+                }
                 minions.get(side).remove(attacker);
                 for(Observer observer : observers){
                     observer.onMinionDead(side, p1, attacker);

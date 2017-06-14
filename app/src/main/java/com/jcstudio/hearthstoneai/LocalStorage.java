@@ -69,6 +69,16 @@ public class LocalStorage {
         return output;
     }
 
+    public void saveFloat(String key, float value){
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putFloat(key, value);
+        editor.apply();
+    }
+
+    public float getFloat(String key){
+        return sp.getFloat(key, 0);
+    }
+
     public void saveBoolean(String key, boolean value){
         SharedPreferences.Editor editor = sp.edit();
         editor.putBoolean(key, value);

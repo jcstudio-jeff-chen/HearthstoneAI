@@ -1,6 +1,7 @@
 package com.jcstudio.hearthstoneai;
 
 import android.os.AsyncTask;
+import android.os.Handler;
 
 import java.util.ArrayList;
 
@@ -25,12 +26,19 @@ public class GameRunner implements Game.Observer{
         }
     }
 
-    public void start(GameOverListener listener){
+    public int start(GameOverListener listener){
         game.resetMana();
         game.createDeck();
         game.shuffle();
         game.initialDraw();
-        listener.gameOver(game.hp[0] > 0 ? 0 : 1);
+        while(!game.isOver()){
+            doSomething();
+        }
+        int winner = game.hp[0] > 0 ? 0 : 1;
+        if(listener != null) {
+            listener.gameOver(winner);
+        }
+        return winner;
     }
 
     public void doSomething(){
@@ -39,9 +47,6 @@ public class GameRunner implements Game.Observer{
         for(int action : actions){
             if(game.isActionAvailable(side, action)){
                 game.performAction(action);
-                if(action != Game.POSSIBLE_ACTIONS-1 && !game.isOver() && !paused){
-                    doSomething();
-                }
                 break;
             }
         }
@@ -112,7 +117,7 @@ public class GameRunner implements Game.Observer{
 
     @Override
     public void onSideChanged(int side) {
-        doSomething();
+
     }
 
     @Override

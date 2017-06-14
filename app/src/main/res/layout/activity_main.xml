@@ -27,12 +27,14 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_current_ai"/>
+            android:text="@string/evolve_ai"
+            android:onClick="evolveAI"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/reset_ai"/>
+            android:text="@string/ai_test"
+            android:onClick="testAI"/>
 
         <Button
             android:layout_width="match_parent"

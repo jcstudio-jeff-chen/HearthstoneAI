@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 
 public class BoardData implements Game.Observer{
-    public static final int REMEMBERED = 5;
+    public static final int REMEMBERED = 1;
     public Game game;
 
     /*
@@ -132,6 +132,9 @@ public class BoardData implements Game.Observer{
 
     @Override
     public void onCardUsed(int side, int i, Card c) {
+        if(REMEMBERED <= 0){
+            return;
+        }
         ArrayList<Card> cards = lastCards.get(side);
         if(cards.size() == REMEMBERED){
             cards.remove(0);
