@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 
 public class NeuralNetwork {
-    private ArrayList<Layer> layers = new ArrayList<>();
+    public ArrayList<Layer> layers = new ArrayList<>();
 
     public void addLayer(Layer layer){
         layers.add(layer);
@@ -36,7 +36,20 @@ public class NeuralNetwork {
         for(Layer layer : layers){
             result += layer.nParam();
         }
-        Log.d("NeuralNetwork", "nParameter = " + result);
         return result;
+    }
+
+    public void printNodeCount(){
+        if(layers.isEmpty()){
+            Log.d("NeuralNetwork", "Neural network node counts: 0");
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append(layers.get(0).nInput());
+        for(Layer layer : layers){
+            sb.append(" ");
+            sb.append(layer.nOutput());
+        }
+        Log.d("NeuralNetwork", "Neural network node counts: " + sb.toString());
     }
 }

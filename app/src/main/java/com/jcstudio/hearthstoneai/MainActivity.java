@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         HsNeuralNetwork nn = new HsNeuralNetwork();
+        nn.printNodeCount();
         db = new EvolutionAlgorithmDatabase(this, nn.nParam());
         sp = new LocalStorage(this);
 

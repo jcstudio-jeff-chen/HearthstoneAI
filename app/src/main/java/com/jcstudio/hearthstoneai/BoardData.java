@@ -32,7 +32,7 @@ public class BoardData implements Game.Observer{
 
 
     public static int arraySize(){
-        return 70 + 2 + 40 + 2 + 2 + 1 + 2 + 2 + 2*REMEMBERED*4;
+        return 70 + 2 + 40 + 2 + 2 + 1 + 2 + 2 + 2*REMEMBERED*4 + 7;
     }
 
     public double[] createArray(int side){
@@ -81,6 +81,15 @@ public class BoardData implements Game.Observer{
                 output[index+1] = c.hasTaunt ? 1:0;
                 output[index+2] = c.atk;
                 output[index+3] = c.hp;
+            }
+        }
+        for(int i = 0; i < game.minions.get(side).size(); i++){
+            int index = 121 + REMEMBERED*2*4 + i;
+            Minion m = game.minions.get(side).get(i);
+            if(m.isResting || m.isSleeping){
+                output[index] = 0;
+            } else {
+                output[index] = 1;
             }
         }
         return output;

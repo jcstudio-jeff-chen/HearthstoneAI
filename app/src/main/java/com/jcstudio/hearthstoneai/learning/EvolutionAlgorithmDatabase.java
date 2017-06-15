@@ -75,8 +75,8 @@ public class EvolutionAlgorithmDatabase {
         return db.delete(TABLE_NAME, GENERATION + "=" + generation, null);
     }
 
-    public boolean delete(long rowId) {
-        return db.delete(TABLE_NAME, _ID + "=" + rowId, null) > 0;
+    public int delete(int populationId) {
+        return db.delete(TABLE_NAME, POPULATION_ID + "=" + populationId, null);
     }
 
     // 更新資料紀錄

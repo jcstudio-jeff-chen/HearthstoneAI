@@ -8,5 +8,5 @@
     <string name="game_guide_content">每副套牌由花費 1 至 10 的卡牌各三張構成，共 30 張，每張卡牌能力值隨機，並可能有嘲諷，嘲諷怪的血量普遍偏高，花費與能力值的設定盡可能與爐石規則相同。</string>
     <string name="your_turn">你的回合</string>
     <string name="ai_test">AI 強度測試</string>
-    <string name="test_desc">目前最新的世代與最原始的世代進行 100 場對戰，觀察受過訓練的 AI 勝率是否有明顯提升。</string>
+    <string name="test_desc">目前最新的世代與最原始的世代進行對戰，觀察受過訓練的 AI 勝率是否有明顯提升。</string>
 </resources>

@@ -4,12 +4,14 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.jcstudio.hearthstoneai.learning.EvolutionAlgorithmDatabase;
 import com.jcstudio.hearthstoneai.learning.HsNeuralNetwork;
 
+import java.util.Locale;
 import java.util.Random;
 
 import static com.jcstudio.hearthstoneai.LearnActivity.POPULATION_SIZE;
@@ -26,6 +28,7 @@ public class TestActivity extends AppCompatActivity {
     private TextView tvReportWin;
     private TextView tvReportLose;
     private TextView tvReportRate;
+    private EditText etFights;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,17 +43,27 @@ public class TestActivity extends AppCompatActivity {
         tvReportWin = (TextView) findViewById(R.id.tv_report_win);
         tvReportLose = (TextView) findViewById(R.id.tv_report_lose);
         tvReportRate = (TextView) findViewById(R.id.tv_report_rate);
+        etFights = (EditText) findViewById(R.id.et_fights);
 
         HsNeuralNetwork nn = new HsNeuralNetwork();
         db = new EvolutionAlgorithmDatabase(this, nn.nParam());
     }
 
     public void startTest(View view){
+        int x = FIGHTS;
+        try{
+            x = Integer.valueOf(etFights.getText().toString());
+        } catch (NumberFormatException ignored){
+
+        }
+
+        final int totalFights = x;
+
         pbFight.setProgress(0);
-        pbFight.setMax(FIGHTS);
+        pbFight.setMax(totalFights);
         tvJob.setText("準備中");
         tvFightProgress.setText("0");
-        tvFightTotal.setText(String.valueOf(FIGHTS));
+        tvFightTotal.setText(String.valueOf(totalFights));
         tvReportTotal.setText("0");
         tvReportWin.setText("0");
         tvReportLose.setText("0");
@@ -67,15 +80,15 @@ public class TestActivity extends AppCompatActivity {
                     tvJob.setText("載入參數");
                 }
                 if(stage == 1){
-                    pbFight.setMax(FIGHTS);
-                    tvFightTotal.setText(String.valueOf(FIGHTS));
+                    pbFight.setMax(totalFights);
+                    tvFightTotal.setText(String.valueOf(totalFights));
                     int wins = values[2];
                     float rate = (float) wins/progress;
                     tvJob.setText("對戰");
                     tvReportTotal.setText(String.valueOf(progress));
                     tvReportWin.setText(String.valueOf(wins));
                     tvReportLose.setText(String.valueOf(progress-wins));
-                    tvReportRate.setText(String.format("%.3f", rate*100));
+                    tvReportRate.setText(String.format(Locale.getDefault(), "%.3f", rate*100));
                 }
                 pbFight.setProgress(progress);
                 tvFightProgress.setText(String.valueOf(progress));
@@ -95,7 +108,7 @@ public class TestActivity extends AppCompatActivity {
                 int fights = 0;
 
                 publishProgress(1, 0, 0);
-                for(int i = 0; i < FIGHTS; i++){
+                for(int i = 0; i < totalFights; i++){
                     int n = r.nextInt(POPULATION_SIZE);
                     double[] x = new double[db.dimension];
                     for(int j = 0; j < x.length; j++){
