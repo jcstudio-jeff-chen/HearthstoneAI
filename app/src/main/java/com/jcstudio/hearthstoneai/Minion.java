@@ -20,6 +20,14 @@ public class Minion extends Card {
     }
 
     @Override
+    public  String toString() {
+        if(isCoin){
+            return "幸運幣";
+        }
+        return cost + "/" + atk + "/" + hp + "/殘血" + currentHp + (hasTaunt ? " 嘲諷":"") ;
+    }
+
+    @Override
     public String shownName() {
         return cost + "\n" + atk + "/" + currentHp;
     }

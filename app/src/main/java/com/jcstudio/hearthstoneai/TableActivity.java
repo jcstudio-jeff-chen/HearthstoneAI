@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class TableActivity extends AppCompatActivity implements Game.Observer {
+    private static final boolean DEBUG = true;
 
     private Game game;
     private TextView[] tvHandCardSize = new TextView[2];
@@ -286,6 +287,15 @@ public class TableActivity extends AppCompatActivity implements Game.Observer {
         int side = game.turnSide;
         if((side == 0 || isCvc) && !game.isOver()){
             ArrayList<Integer> actions = ai[side].getActionList(boardData.createArray(side));
+            if(DEBUG){
+                Log.d("TableActivity", "======== AI 想做的事情列表 ========");
+                for(int code : actions){
+                    if(game.isActionAvailable(side, code)){
+                        String s = game.actionDesc(code);
+                        Log.d("TableActivity", s);
+                    }
+                }
+            }
             for(int code : actions){
                 if(game.isActionAvailable(side, code)){
                     game.performAction(code);

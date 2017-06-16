@@ -116,4 +116,23 @@ public class MainActivity extends AppCompatActivity {
     public void showGameGuide(View v){
         new AlertDialog.Builder(this).setTitle(R.string.game_guide).setMessage(R.string.game_guide_content).show();
     }
+
+    public void upload(View v){
+        new AsyncTask<Void, Integer, double[]>(){
+            @Override
+            protected void onProgressUpdate(Integer... values) {
+                super.onProgressUpdate(values);
+            }
+
+            @Override
+            protected double[] doInBackground(Void... params) {
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(double[] doubles) {
+                super.onPostExecute(doubles);
+            }
+        }.execute();
+    }
 }

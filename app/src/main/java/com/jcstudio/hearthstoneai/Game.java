@@ -413,6 +413,42 @@ public class Game {
         changeSide();
     }
 
+    public String actionDesc(int code){
+        if(code < 56){
+            int p1 = code/8;
+            int p2 = code%8;
+            String attacker;
+            if(p1 < minions.get(turnSide).size()){
+                attacker = minions.get(turnSide).get(p1).toString();
+            } else {
+                attacker = "空氣";
+            }
+            String attacked;
+            if(p2 == 7){
+                attacked = "敵方英雄";
+            } else {
+                if(p2 < minions.get(1-turnSide).size()){
+                    attacked = minions.get(1-turnSide).get(p2).toString();
+                } else {
+                    attacked = "空氣";
+                }
+            }
+            return attacker + " 攻擊 " + attacked;
+        }
+
+        if(code < 66){
+            int p = code-56;
+            String card;
+            if(p < handCards.get(turnSide).size()){
+                card = handCards.get(turnSide).get(p).toString();
+            } else {
+                card = "空氣";
+            }
+            return "打出 " + card;
+        }
+        return "結束回合";
+    }
+
     public boolean isOver(){
         return hp[0] <= 0 || hp[1] <= 0;
     }
